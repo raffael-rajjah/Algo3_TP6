@@ -513,3 +513,57 @@ void rbtree_export_dot ( const BinarySearchTree *t , FILE * file ) {
     bstree_iterative_depth_infix (t , printNode , file ) ;
     fprintf ( file , "\n}\n" ) ;
 }
+
+
+void leftrotate(BinarySearchTree *x){
+    BinarySearchTree* y = x->right;
+    x->right = y->left;
+    if(!bstree_empty(y->left)){
+        y->left->parent = x;
+    }
+
+    y->parent = x->parent;
+    
+
+    if(!(bstree_empty(x->parent)) && x == x->parent->left){
+        x->parent->left = y;
+    }
+
+    else if(!bstree_empty(x->parent)){
+        x->parent->right = y;
+    }
+
+    y->left = x;
+    x->parent = y;
+
+}
+
+void rightrotate(BinarySearchTree *y){
+    BinarySearchTree* x = y->left;
+    y->left = x->right;
+    if(!bstree_empty(x->right)){
+        x->right->parent = y;
+    }
+
+    x->parent = y->parent;
+    
+
+    if(!bstree_empty(y->parent) && y == y->parent->right){
+        y->parent->right = x;
+    }
+
+    else if (!bstree_empty(y->parent)){
+        y->parent->left = x;
+    }
+
+    x->right = y;
+    y->parent = x;
+}
+
+void testrotateleft(BinarySearchTree *t){
+    leftrotate(t);
+}
+
+void testrotateright(BinarySearchTree *t){
+    rightrotate(t);
+}
