@@ -206,10 +206,20 @@ const BinarySearchTree *bstree_iterator_value(const BSTreeIterator *i);
 /** @} */
 
 /*---------------------------  RBTSpecific  -------------------------------*/
-typedef enum {red, back} NodeColor;
+typedef enum {red, black} NodeColor;
 void rbtree_export_dot(const BinarySearchTree *t, FILE *file);
 void testrotateleft(BinarySearchTree *t);
 void testrotateright(BinarySearchTree *t);
 
+ptrBinarySearchTree grandparent(ptrBinarySearchTree n);
+ptrBinarySearchTree uncle(ptrBinarySearchTree n);
+ptrBinarySearchTree fixredblack_insert(ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_insert_case0(ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_insert_case1(ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_insert_case2(ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_insert_case2_left(ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_insert_case2_right(ptrBinarySearchTree x);
 /** @} */
 #endif
+
+

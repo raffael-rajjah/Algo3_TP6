@@ -105,6 +105,13 @@ void bstree_add(ptrBinarySearchTree *t, int v) {
         par->right = newLeaf;
     }
 
+
+    BinarySearchTree *stop = fixredblack_insert(*cur);
+
+    if(stop->parent == NULL){
+        *t = stop;
+    }
+
     while(!bstree_empty(bstree_parent(*cur))){
         *cur = bstree_parent(*cur);
     }
@@ -566,4 +573,95 @@ void testrotateleft(BinarySearchTree *t){
 
 void testrotateright(BinarySearchTree *t){
     rightrotate(t);
+}
+
+ptrBinarySearchTree grandparent(ptrBinarySearchTree n){
+    return bstree_parent(bstree_parent(n));
+}
+
+ptrBinarySearchTree uncle(ptrBinarySearchTree n){
+    BinarySearchTree* grandparent = bstree_parent(bstree_parent(n));
+
+    if(bstree_left(grandparent) == bstree_parent(n)){
+        return bstree_right(grandparent);
+    }
+
+    else{
+        return bstree_left(grandparent);
+
+    }
+}
+
+//TODO : cas else
+
+ptrBinarySearchTree fixredblack_insert(ptrBinarySearchTree x){
+    if (bstree_parent(x)->nodeColor == red){
+        
+        return fixredblack_insert_case0(x);
+
+    }
+
+    else{
+        return x;
+    }
+    
+}
+
+ptrBinarySearchTree fixredblack_insert_case0(ptrBinarySearchTree x){
+    
+    if(bstree_parent(x)->nodeColor == red){
+        bstree_parent(x)->nodeColor = black;
+        
+        return fixredblack_insert_case1(x);
+    }
+
+
+    else{
+        return x;
+    }
+}
+
+
+ptrBinarySearchTree fixredblack_insert_case1(ptrBinarySearchTree x){
+    if(uncle(x)->nodeColor == red){
+        grandparent(x)->nodeColor = red;
+        uncle(x)->nodeColor = black;
+
+        return fixredblack_insert(grandparent(x));
+    }
+
+    else{
+        return fixredblack_insert_case2(x);
+    }
+}
+
+ptrBinarySearchTree fixredblack_insert_case2(ptrBinarySearchTree x){
+
+    if(bstree_parent(x)->left == x){
+        return fixredblack_insert_case2_left(x);
+    }
+
+    else{
+        return fixredblack_insert_case2_right(x);
+    }
+}
+
+ptrBinarySearchTree fixredblack_insert_case2_left(ptrBinarySearchTree x){
+    bstree_parent(x)->nodeColor = black;
+    grandparent(x)->nodeColor = red;
+
+    rightrotate(grandparent(x));
+
+    return x;
+
+}
+
+ptrBinarySearchTree fixredblack_insert_case2_right(ptrBinarySearchTree x){
+    
+    BinarySearchTree* p = bstree_parent(x);
+    
+    leftrotate(p);
+
+    return fixredblack_insert_case2_left(p);
+
 }
