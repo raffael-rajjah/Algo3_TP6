@@ -219,6 +219,14 @@ ptrBinarySearchTree fixredblack_insert_case1(ptrBinarySearchTree x);
 ptrBinarySearchTree fixredblack_insert_case2(ptrBinarySearchTree x);
 ptrBinarySearchTree fixredblack_insert_case2_left(ptrBinarySearchTree x);
 ptrBinarySearchTree fixredblack_insert_case2_right(ptrBinarySearchTree x);
+
+ptrBinarySearchTree fixredblack_remove(ptrBinarySearchTree p, ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_remove_case1_left(ptrBinarySearchTree p, ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_remove_case1_right(ptrBinarySearchTree p, ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_remove_case1(ptrBinarySearchTree p, ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_remove_case2_left(ptrBinarySearchTree p, ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_remove_case2_right(ptrBinarySearchTree p, ptrBinarySearchTree x);
+ptrBinarySearchTree fixredblack_remove_case2(ptrBinarySearchTree p, ptrBinarySearchTree x);
 /** @} */
 #endif
 

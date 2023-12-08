@@ -720,3 +720,36 @@ ptrBinarySearchTree fixredblack_insert_case2_right(ptrBinarySearchTree x){
     return x;
 
 }
+
+ptrBinarySearchTree brother(ptrBinarySearchTree x){
+    if (!bstree_empty(bstree_parent) && bstree_parent(x)->left == x){
+        return bstree_parent(x)->right;
+    }
+    
+    else if(!bstree_empty(bstree_parent) && bstree_parent(x)->right == x){
+        return bstree_parent(x)->left;
+    }
+
+    return NULL;
+    
+}
+
+ptrBinarySearchTree fixredblack_remove(ptrBinarySearchTree p, ptrBinarySearchTree x){
+
+    if(bstree_empty(bstree_parent(x))){ // if x is root
+        x->nodeColor = black;
+        return x;
+    }
+    
+    else {
+        // cas 1
+        if(brother(x)->nodeColor == black){
+            return fixredblack_remove_case1(p, x);
+        }
+        // cas 2
+        else{
+            return fixredblack_insert_case2(x);
+        }
+
+    }
+}
