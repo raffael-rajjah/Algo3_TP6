@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/Code/redblack_trees",
-            "args": ["../Test/testfilesimple.txt"],
+            "args": ["../Test/testfile1.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
