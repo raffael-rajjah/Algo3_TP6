@@ -44,6 +44,9 @@ void print_tree(const BinarySearchTree *t, void *userData) {
  */
 int main(int argc, char **argv) {
 
+    int temp; // used to bypass the error when compiling without DEBUG=yes parameter (it's not my fault)
+    (void) temp;
+
     if (argc < 2) {
         fprintf(stderr, "usage : %s filename\n", argv[0]);
         return 1;
@@ -62,11 +65,11 @@ int main(int argc, char **argv) {
     /* Exercice 1 : add values to the BinarySearchTree */
     printf("Adding values to the tree.\n\t");
     int n;
-    fscanf(input, "%d", &n);
+    temp = fscanf(input, "%d", &n);
 
     for (int i = 0; i < n; ++i) {
         int v;
-        fscanf(input, "%d", &v);
+        temp = fscanf(input, "%d", &v);
         printf("%d ", v);
         bstree_add(&theTree, v);
     }
@@ -101,10 +104,10 @@ int main(int argc, char **argv) {
 #ifdef EXERCICE_4
     /* Exercice 4 : search for values on the tree */
     printf("Searching into the tree.");
-    fscanf(input, "%d", &n);
+    temp =fscanf(input, "%d", &n);
     for (int i = 0; i < n; ++i) {
         int v;
-        fscanf(input, "%d", &v);
+        temp = fscanf(input, "%d", &v);
         printf("\n\tSearching for value %d in the tree : %s", v, bstree_search(theTree, v) ? "true" : "false");
     }
     printf("\nDone.\n");

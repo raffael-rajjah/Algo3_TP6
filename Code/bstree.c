@@ -151,7 +151,7 @@ BinarySearchTree *bstree_successor(const BinarySearchTree *x) {
         }
         
 
-        /* code */
+
     }
 
     else{
@@ -163,12 +163,12 @@ BinarySearchTree *bstree_successor(const BinarySearchTree *x) {
         else{
             return NULL;
         }
-        // currentNode = x;
+
         while (parent != NULL && currentNode == parent->right)
         {
             currentNode = parent;
             parent = currentNode->parent;
-            // return parent;
+
         }
         
         
@@ -180,17 +180,6 @@ BinarySearchTree *bstree_successor(const BinarySearchTree *x) {
 
 BinarySearchTree *bstree_predecessor(const BinarySearchTree *x) {
     assert(!bstree_empty(x));
-    
-    // BinarySearchTree* currentNode = bstree_left(x);
-
-    // while (!bstree_empty(currentNode) && !bstree_empty(currentNode->right)){
-        
-    //     currentNode = bstree_right(currentNode);
-
-    // }
-    
-
-    // return currentNode;
 
     BinarySearchTree* currentNode = bstree_left(x);
 
@@ -202,25 +191,23 @@ BinarySearchTree *bstree_predecessor(const BinarySearchTree *x) {
 
         }
         
-
-        /* code */
     }
 
     else{
         BinarySearchTree* parent = bstree_parent(x);
-        if(!bstree_empty(bstree_parent(x))){ //bypass const
+        if(!bstree_empty(bstree_parent(x))){ 
             if(parent->right == x) currentNode = parent->right;
             else currentNode = parent->left;
         }
         else{
             return NULL;
         }
-        // currentNode = x;
+
         while (parent != NULL && currentNode == parent->left)
         {
             currentNode = parent;
             parent = currentNode->parent;
-            // return parent;
+
         }
         
         
@@ -721,35 +708,4 @@ ptrBinarySearchTree fixredblack_insert_case2_right(ptrBinarySearchTree x){
 
 }
 
-ptrBinarySearchTree brother(ptrBinarySearchTree x){
-    if (!bstree_empty(bstree_parent) && bstree_parent(x)->left == x){
-        return bstree_parent(x)->right;
-    }
-    
-    else if(!bstree_empty(bstree_parent) && bstree_parent(x)->right == x){
-        return bstree_parent(x)->left;
-    }
 
-    return NULL;
-    
-}
-
-ptrBinarySearchTree fixredblack_remove(ptrBinarySearchTree p, ptrBinarySearchTree x){
-
-    if(bstree_empty(bstree_parent(x))){ // if x is root
-        x->nodeColor = black;
-        return x;
-    }
-    
-    else {
-        // cas 1
-        if(brother(x)->nodeColor == black){
-            return fixredblack_remove_case1(p, x);
-        }
-        // cas 2
-        else{
-            return fixredblack_insert_case2(x);
-        }
-
-    }
-}
